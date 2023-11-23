@@ -4,7 +4,7 @@ import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
 
 const EventsList = ({ events }) => {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleClick = (id) => {
         navigate(`/${id}`);
@@ -12,6 +12,7 @@ const EventsList = ({ events }) => {
 
     return (
         <div className={styles.allEventsHere}>
+            {!events.length && <h1 className={styles.noneShown}>NOTHING TO SHOW HERE</h1>}
             {events.map((event) => (
                 <div className={styles.eventTile} key={event.id} onClick={() => handleClick(event.id)}>
                     <div className={styles.calTile}>

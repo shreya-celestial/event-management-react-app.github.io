@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import styles from '../styleModules/UserPage.module.css';
 import NavBar from './NavBar';
 import Home from './Home';
+import Event from './Event';
+import EditEvent from './EditEvent';
 
 const UserPage = ({ user }) => {
     return (
@@ -11,8 +13,8 @@ const UserPage = ({ user }) => {
                 <Routes>
                     <Route exact path='/' element={<Home user={user} />} />
                     <Route exact path='/create' element={<>create</>} />
-                    <Route exact path='/:id' element={<>details</>} />
-                    <Route exact path='/:id/edit' element={<>edit</>} />
+                    <Route exact path='/:id' element={<Event />} />
+                    <Route exact path='/:id/edit' element={<EditEvent />} />
                 </Routes>
             </div>
         </Router>
