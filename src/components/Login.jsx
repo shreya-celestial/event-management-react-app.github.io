@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { tokenRequest, orgRequest } from '../apis.jsx';
 import login from '../assets/login.png';
 import styles from '../styleModules/Login.module.css'
 
@@ -11,28 +12,6 @@ const Login = ({ setUser }) => {
     const [buttonText, setButtonText] = useState('Submit');
     const [formDisable, setFormDisable] = useState(false);
     const [isError, setIsError] = useState(error);
-
-    const tokenRequest = async (inputText) => {
-        const config = {
-            method: "GET"
-        };
-        const url = `https://www.eventbriteapi.com/v3/users/me/?token=${inputText}`;
-        const response = await fetch(url, config);
-        return response.json();
-    }
-
-    const orgRequest = async (user) => {
-        const config = {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        };
-        const url = `https://www.eventbriteapi.com/v3/users/${user.id}/organizations/`;
-        const response = await fetch(url, config);
-        const data = await response.json();
-        return data.organizations[0].id;
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
