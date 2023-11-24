@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Login from "./components/Login";
 import UserPage from "./components/UserPage";
+import React from 'react';
 
 const sessionUser = sessionStorage.getItem('user');
 const currUser = sessionUser ? JSON.parse(sessionUser) : null;
