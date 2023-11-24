@@ -1,19 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSingleEvent } from '../apis';
+import { getSingleEvent, deleteEvent } from '../apis';
 import styles from '../styleModules/Event.module.css';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import DeleteModal from './DeleteModal';
 
 const Event = () => {
     const user = JSON.parse(sessionStorage.getItem('user'));
     const { id } = useParams();
     const [isPending, setIsPending] = useState(true);
     const [eventDetails, setEventDetails] = useState(null);
+    const [loadingMsg, setLoadingMsg] = useState('Loading...');
     const nav = useNavigate();
+    const dialog = useRef();
 
     const handleUpdate = () => {
         nav(`/${id}/edit`);
+    }
+
+    const handleDialog = () => {
+        dialog.current.open();
+    }
+
+    const handleDelete = async () => {
+        setEventDetails(null);
+        setIsPending(true);
+        setLoadingMsg('Deleting...');
+        await deleteEvent(user, id);
+        nav('/');
     }
 
     useEffect(() => {
@@ -27,7 +42,7 @@ const Event = () => {
 
     return (
         <>
-            {isPending && <h1 className={styles.loading}>Loading...</h1>}
+            {isPending && <h1 className={styles.loading}>{loadingMsg}</h1>}
             {eventDetails && <div className={styles.eventSpecificDiv}>
                 <h2>Event Details</h2>
                 <ul>
@@ -74,7 +89,8 @@ const Event = () => {
                 </ul>
                 <div className={styles.eventButtons}>
                     <button onClick={handleUpdate}>Update</button>
-                    <button>Delete</button>
+                    <button onClick={handleDialog}>Delete</button>
+                    <DeleteModal ref={dialog} eventName={eventDetails.name.text} deleteNow={handleDelete} />
                 </div>
             </div>}
         </>
