@@ -25,7 +25,9 @@
 }
 
 .eventTile p{
-    margin: 10px;
+    margin: 6px;
+    margin-top: 10px;
+    margin-bottom: 2px;
 }
 
 .endDateEventTile {
@@ -46,6 +48,7 @@
 
 .calTile h3 {
     margin: 0px;
+    margin-bottom: 10px;
 }
 
 .noneShown {
@@ -56,4 +59,24 @@
     justify-content: center;
     align-items: center;
     color: #707070;
+}
+
+@media(max-width: 930px) and (min-width:700px) {
+
+    .eventTile {
+        flex-basis: 30.3333%;
+    }
+
+}
+
+@media(max-width:700px) {
+
+    .allEventsHere {
+        width: 80%;
+    }
+
+    .eventTile {
+        flex-basis: 100%;
+    }
+
 }
