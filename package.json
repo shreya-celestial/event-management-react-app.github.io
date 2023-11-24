@@ -2,7 +2,7 @@
   "name": "event-management-react-app",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://shreya-celestial.github.io/event-management-react-app.github.io/",
+  "homepage": "https://shreya-celestial.github.io/event-management-react-app.github.io",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
