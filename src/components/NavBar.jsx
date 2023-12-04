@@ -8,7 +8,7 @@ const NavBar = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.pathname === '/create') {
+        if (location.pathname === '/event/create') {
             create.current.className = styles.active;
             events.current.className = '';
         }
@@ -29,8 +29,8 @@ const NavBar = () => {
             </div>
             <div className={styles.buttonsMargin}>
                 <div className={styles.buttons}>
-                    <Link to='/' ref={events} className={styles.active}>All Events</Link>
-                    <Link to='/create' ref={create}>Create Event</Link>
+                    <Link to='/events' ref={events} className={styles.active}>All Events</Link>
+                    <Link to='/event/create' ref={create}>Create Event</Link>
                 </div>
             </div>
         </nav>

@@ -18,9 +18,10 @@ const CreateUpdateEvent = () => {
     const [eventDetails, setEventDetails] = useState(null);
     const [formDisable, setFormDisable] = useState(false);
     const [buttonText, setButtonText] = useState('');
+    const [isError, setIsError] = useState(null);
     const nav = useNavigate();
 
-    const match = useMatch('/:id/edit');
+    const match = useMatch('/event/:id/edit');
     useEffect(() => {
         if (match) {
             const id = match.params.id;
@@ -28,6 +29,14 @@ const CreateUpdateEvent = () => {
             const data = async () => {
                 const event = await getSingleEvent(user, id);
                 setIsPending(false);
+                if (event?.error === "NOT_FOUND") {
+                    setIsError('Sorry, Page not found');
+                    return
+                }
+                if (!event) {
+                    setIsError('Error.. Try Again!');
+                    return
+                }
                 const eventObject = {
                     name: event.name.text,
                     description: event.description.text,
@@ -36,12 +45,14 @@ const CreateUpdateEvent = () => {
                     capacity: event.capacity
                 }
                 setEventDetails(eventObject);
+                setIsError(null);
             }
             data();
         }
         else {
             setButtonText('Create Event')
             setEventDetails(eventObject);
+            setIsError(null);
         }
     }, [match])
 
@@ -72,7 +83,7 @@ const CreateUpdateEvent = () => {
                 }
             };
             await updateEvent(user, id, body);
-            nav(`/${id}`);
+            nav(`/event/${id}`);
             return
         }
         setButtonText('Loading...');
@@ -97,11 +108,11 @@ const CreateUpdateEvent = () => {
             }
         };
         await postNewEvent(user, body);
-        nav('/');
+        nav('/events');
     }
 
     return (
-        <FormContainer isMatch={match} isPending={isPending} eventDetails={eventDetails} formDisable={formDisable} handleSubmit={handleSubmit} handleChanges={handleChanges} buttonText={buttonText} />
+        <FormContainer isMatch={match} isPending={isPending} eventDetails={eventDetails} formDisable={formDisable} handleSubmit={handleSubmit} handleChanges={handleChanges} buttonText={buttonText} isError={isError} />
     );
 }
 

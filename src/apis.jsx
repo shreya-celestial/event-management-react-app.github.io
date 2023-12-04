@@ -5,8 +5,13 @@ export const tokenRequest = async (inputText) => {
         method: "GET"
     };
     const url = `${baseUrl}/users/me/?token=${inputText}`;
-    const response = await fetch(url, config);
-    return response.json();
+    try {
+        const response = await fetch(url, config);
+        return response.json();
+    } catch (err) {
+        console.log(err)
+        return
+    }
 }
 
 export const orgRequest = async (user) => {
@@ -17,9 +22,14 @@ export const orgRequest = async (user) => {
         }
     };
     const url = `${baseUrl}/users/${user.id}/organizations/`;
-    const response = await fetch(url, config);
-    const data = await response.json();
-    return data.organizations[0].id;
+    try {
+        const response = await fetch(url, config);
+        const data = await response.json();
+        return data.organizations[0].id;
+    } catch (err) {
+        console.log(err);
+        return
+    }
 }
 
 export const allEvents = async (user) => {
@@ -30,9 +40,14 @@ export const allEvents = async (user) => {
         }
     };
     const url = `${baseUrl}/organizations/${user.orgId}/events/`;
-    const response = await fetch(url, config);
-    const data = await response.json();
-    return data.events;
+    try {
+        const response = await fetch(url, config);
+        const data = await response.json();
+        return data.events;
+    } catch (err) {
+        console.log(err)
+        return
+    }
 }
 
 export const postNewEvent = async (user, body) => {
@@ -45,9 +60,14 @@ export const postNewEvent = async (user, body) => {
         body: JSON.stringify(body)
     };
     const url = `${baseUrl}/organizations/${user.orgId}/events/`;
-    const response = await fetch(url, config);
-    const data = await response.json();
-    return data.id;
+    try {
+        const response = await fetch(url, config);
+        const data = await response.json();
+        return data.id;
+    } catch (err) {
+        console.log(err)
+        return
+    }
 }
 
 export const getSingleEvent = async (user, id) => {
@@ -58,8 +78,12 @@ export const getSingleEvent = async (user, id) => {
         }
     };
     const url = `${baseUrl}/events/${id}/`;
-    const response = await fetch(url, config);
-    return response.json();
+    try {
+        const response = await fetch(url, config);
+        return response.json();
+    } catch (err) {
+        return null;
+    }
 }
 
 export const updateEvent = async (user, id, body) => {
@@ -72,9 +96,14 @@ export const updateEvent = async (user, id, body) => {
         body: JSON.stringify(body)
     };
     const url = `${baseUrl}/events/${id}/`;
-    const response = await fetch(url, config);
-    const data = await response.json();
-    return data.id;
+    try {
+        const response = await fetch(url, config);
+        const data = await response.json();
+        return data.id;
+    } catch (err) {
+        console.log(err)
+        return
+    }
 }
 
 export const deleteEvent = async (user, id) => {
@@ -85,6 +114,11 @@ export const deleteEvent = async (user, id) => {
         }
     };
     const url = `https://private-anon-124a7d0191-eventbriteapiv3public.apiary-proxy.com/v3/events/${id}/`;
-    const response = await fetch(url, config);
-    return response.json();
+    try {
+        const response = await fetch(url, config);
+        return response.json();
+    } catch (err) {
+        console.log(err)
+        return
+    }
 }

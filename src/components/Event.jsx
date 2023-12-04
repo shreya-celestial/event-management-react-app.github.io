@@ -12,11 +12,12 @@ const Event = () => {
     const [isPending, setIsPending] = useState(true);
     const [eventDetails, setEventDetails] = useState(null);
     const [loadingMsg, setLoadingMsg] = useState('Loading...');
+    const [isError, setIsError] = useState(null);
     const nav = useNavigate();
     const dialog = useRef();
 
     const handleUpdate = () => {
-        nav(`/${id}/edit`);
+        nav(`/event/${id}/edit`);
     }
 
     const handleDialog = () => {
@@ -28,14 +29,23 @@ const Event = () => {
         setIsPending(true);
         setLoadingMsg('Deleting...');
         await deleteEvent(user, id);
-        nav('/');
+        nav('/events');
     }
 
     useEffect(() => {
         const data = async () => {
             const event = await getSingleEvent(user, id);
             setIsPending(false);
+            if (event?.error === "NOT_FOUND") {
+                setIsError('Sorry, Page not found');
+                return
+            }
+            if (!event) {
+                setIsError('Error.. Try Again!');
+                return
+            }
             setEventDetails(event);
+            setIsError(null);
         }
         data();
     }, [])
@@ -43,6 +53,7 @@ const Event = () => {
     return (
         <>
             {isPending && <h1 className={styles.loading}>{loadingMsg}</h1>}
+            {isError && <h1 className={styles.loading}>{isError}</h1>}
             {eventDetails && <div className={styles.eventSpecificDiv}>
                 <h2>Event Details</h2>
                 <ul>

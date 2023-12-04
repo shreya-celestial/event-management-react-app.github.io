@@ -4,7 +4,7 @@ const date = new Date;
 date.setDate(date.getDate() + 1);
 const minDate = date.toISOString().split('T')[0];
 
-const formContainer = ({ isMatch, isPending, eventDetails, formDisable, handleSubmit, handleChanges, buttonText }) => {
+const formContainer = ({ isMatch, isPending, eventDetails, formDisable, handleSubmit, handleChanges, buttonText, isError }) => {
 
     let contents
 
@@ -20,6 +20,7 @@ const formContainer = ({ isMatch, isPending, eventDetails, formDisable, handleSu
     return (
         <>
             {contents}
+            {isError && <h1 className={styles.loading}>{isError}</h1>}
             {eventDetails && <div className={styles.formContainer}>
                 <form className={styles.forForm} onSubmit={handleSubmit}>
                     <h2>Update Event</h2>
@@ -34,12 +35,12 @@ const formContainer = ({ isMatch, isPending, eventDetails, formDisable, handleSu
                     <div>
                         <label> Start Date</label>
                         {isMatch && <input type="text" disabled value={eventDetails.start} onChange={(e) => handleChanges(e, "start")} />}
-                        {!isMatch && <input type="date" disabled={formDisable} min={minDate} value={eventDetails.start} onChange={(e) => handleChanges(e, "start")} />}
+                        {!isMatch && <input type="date" required disabled={formDisable} min={minDate} value={eventDetails.start} onChange={(e) => handleChanges(e, "start")} />}
                     </div>
                     <div>
                         <label> End Date</label>
                         {isMatch && <input type="text" disabled value={eventDetails.end} onChange={(e) => handleChanges(e, "end")} />}
-                        {!isMatch && <input type="date" disabled={formDisable} min={eventDetails.start ? eventDetails.start : minDate} value={eventDetails.end} onChange={(e) => handleChanges(e, "end")} />}
+                        {!isMatch && <input type="date" required disabled={formDisable} min={eventDetails.start ? eventDetails.start : minDate} value={eventDetails.end} onChange={(e) => handleChanges(e, "end")} />}
                     </div>
                     <div>
                         <label> Capacity</label>

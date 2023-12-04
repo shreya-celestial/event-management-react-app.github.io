@@ -20,7 +20,7 @@ const EventsList = ({ user }) => {
     }, []);
 
     const handleClick = (id) => {
-        navigate(`/${id}`);
+        navigate(`/event/${id}`);
     }
 
     return (
