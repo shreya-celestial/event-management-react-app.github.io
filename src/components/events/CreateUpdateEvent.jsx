@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMatch, useNavigate } from 'react-router-dom';
-import { getSingleEvent, updateEvent, postNewEvent } from '../apis';
+import { getSingleEvent, updateEvent, postNewEvent } from '../../apis';
 import FormContainer from './FormContainer'
 import moment from 'moment';
 

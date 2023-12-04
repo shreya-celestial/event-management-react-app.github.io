@@ -1,4 +1,5 @@
-import styles from '../styleModules/EditEvent.module.css';
+import styles from '../../styleModules/EditEvent.module.css';
+
 
 const date = new Date;
 date.setDate(date.getDate() + 1);

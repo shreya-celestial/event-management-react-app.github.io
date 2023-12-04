@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import cal from '../assets/cal.png';
-import styles from '../styleModules/EventsList.module.css';
+import cal from '../../assets/cal.png';
+import styles from '../../styleModules/EventsList.module.css';
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
-import { allEvents } from '../apis.jsx';
+import { allEvents } from '../../apis.jsx';
 
 const EventsList = ({ user }) => {
     const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import { createPortal } from "react-dom";
-import cross from '../assets/cross.png';
-import styles from '../styleModules/DeleteModal.module.css'
+import cross from '../../assets/cross.png';
+import styles from '../../styleModules/DeleteModal.module.css'
 
 const stylesDelete = {
     backgroundColor: 'red'

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSingleEvent, deleteEvent } from '../apis';
-import styles from '../styleModules/Event.module.css';
+import { getSingleEvent, deleteEvent } from '../../apis';
+import styles from '../../styleModules/Event.module.css';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import DeleteModal from './DeleteModal';

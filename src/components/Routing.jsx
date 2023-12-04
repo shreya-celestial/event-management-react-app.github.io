@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-import Event from './Event';
-import CreateUpdateEvent from './CreateUpdateEvent';
-import EventsList from './EventsList';
+import Event from './events/Event';
+import CreateUpdateEvent from './events/CreateUpdateEvent';
+import EventsList from './events/EventsList';
 import NotFound from './NotFound'
 
 const Routing = ({ user }) => {
