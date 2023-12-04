@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Login from "./components/Login";
-import UserPage from "./components/UserPage";
+import Home from "./components/Home";
 import React from 'react';
 
 const sessionUser = sessionStorage.getItem('user');
@@ -14,7 +14,7 @@ const App = () => {
         contents = <Login setUser={setUser} />
     }
     else {
-        contents = <UserPage user={user} />
+        contents = <Home user={user} />
     }
 
     return (
