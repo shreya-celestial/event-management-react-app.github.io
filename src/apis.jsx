@@ -1,10 +1,10 @@
-const baseUrl = "https://www.eventbriteapi.com/v3";
+// const baseUrl = "https://www.eventbriteapi.com/v3";
 
 export const tokenRequest = async (inputText) => {
     const config = {
         method: "GET"
     };
-    const url = `${baseUrl}/users/me/?token=${inputText}`;
+    const url = `/api/users/me/?token=${inputText}`;
     try {
         const response = await fetch(url, config);
         return response.json();
@@ -21,7 +21,7 @@ export const orgRequest = async (user) => {
             Authorization: `Bearer ${user.token}`
         }
     };
-    const url = `${baseUrl}/users/${user.id}/organizations/`;
+    const url = `/api/users/${user.id}/organizations/`;
     try {
         const response = await fetch(url, config);
         const data = await response.json();
@@ -39,7 +39,7 @@ export const allEvents = async (user) => {
             Authorization: `Bearer ${user.token}`
         }
     };
-    const url = `${baseUrl}/organizations/${user.orgId}/events/`;
+    const url = `/api/organizations/${user.orgId}/events/`;
     try {
         const response = await fetch(url, config);
         const data = await response.json();
@@ -59,7 +59,7 @@ export const postNewEvent = async (user, body) => {
         },
         body: JSON.stringify(body)
     };
-    const url = `${baseUrl}/organizations/${user.orgId}/events/`;
+    const url = `/api/organizations/${user.orgId}/events/`;
     try {
         const response = await fetch(url, config);
         const data = await response.json();
@@ -77,7 +77,7 @@ export const getSingleEvent = async (user, id) => {
             Authorization: `Bearer ${user.token}`
         }
     };
-    const url = `${baseUrl}/events/${id}/`;
+    const url = `/api/events/${id}/`;
     try {
         const response = await fetch(url, config);
         return response.json();
@@ -95,7 +95,7 @@ export const updateEvent = async (user, id, body) => {
         },
         body: JSON.stringify(body)
     };
-    const url = `${baseUrl}/events/${id}/`;
+    const url = `/api/events/${id}/`;
     try {
         const response = await fetch(url, config);
         const data = await response.json();
@@ -113,7 +113,7 @@ export const deleteEvent = async (user, id) => {
             Authorization: `Bearer ${user.token}`
         }
     };
-    const url = `https://private-anon-124a7d0191-eventbriteapiv3public.apiary-proxy.com/v3/events/${id}/`;
+    const url = `/api/events/${id}/`;
     try {
         const response = await fetch(url, config);
         return response.json();
